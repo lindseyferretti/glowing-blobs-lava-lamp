@@ -51,10 +51,10 @@ const Settings = ({
       </SheetTrigger>
       <SheetContent 
         side={isMobile ? "top" : "right"}
-        className="bg-[#1A1F2C] border border-[#D6BCFA] shadow-[0_0_10px_rgba(214,188,250,0.2)] backdrop-blur-sm"
+        className="bg-[#1A1F2C] shadow-lg backdrop-blur-sm"
       >
         <SheetHeader>
-          <SheetTitle className="text-[#D6BCFA] font-[Silkscreen] text-sm uppercase">Settings</SheetTitle>
+          <SheetTitle className="text-white/90 text-sm uppercase">Settings</SheetTitle>
         </SheetHeader>
         <div className="py-4 space-y-4">
           <SettingsSlider
@@ -86,7 +86,7 @@ const Settings = ({
           <Button 
             variant="outline" 
             onClick={handleReset}
-            className="w-full border border-[#D6BCFA] bg-[#221F26]/80 text-[#D6BCFA] hover:bg-[#D6BCFA] hover:text-[#1A1F2C] font-[Silkscreen] text-xs uppercase transition-all duration-300"
+            className="w-full bg-black/20 text-white/90 hover:bg-black/40 text-xs uppercase transition-all duration-300"
           >
             Reset
           </Button>
