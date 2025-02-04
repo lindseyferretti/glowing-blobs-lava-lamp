@@ -34,8 +34,8 @@ const LavaLamp: React.FC = () => {
         blobs.current.push({
           x: Math.random() * canvas.width,
           y: canvas.height + Math.random() * 100,
-          vx: (Math.random() - 0.5) * 2,
-          vy: -Math.random() * 2 - 1,
+          vx: (Math.random() - 0.5), // Reduced from *2 to *1
+          vy: -Math.random() - 0.5, // Reduced from *2-1 to *1-0.5
           radius: minRadius + Math.random() * (maxRadius - minRadius),
         });
       }
