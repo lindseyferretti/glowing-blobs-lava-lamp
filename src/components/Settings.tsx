@@ -7,9 +7,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import SettingsSlider from "@/components/ui/settings-slider";
+import SettingsColor from "@/components/ui/settings-color";
 
 interface SettingsProps {
   blobSpeed: number;
@@ -50,58 +51,44 @@ const Settings = ({
       </SheetTrigger>
       <SheetContent 
         side={isMobile ? "top" : "right"}
-        className="bg-[#1A1F2C] border-2 border-[#D6BCFA] shadow-[0_0_20px_rgba(214,188,250,0.3)] backdrop-blur-sm"
+        className="bg-[#1A1F2C] border border-[#D6BCFA] shadow-[0_0_10px_rgba(214,188,250,0.2)] backdrop-blur-sm"
       >
         <SheetHeader>
-          <SheetTitle className="text-[#D6BCFA] font-[Silkscreen] text-xl uppercase tracking-wider px-4 py-2 border-2 border-[#D6BCFA] rounded-lg text-center shadow-[0_0_10px_rgba(214,188,250,0.2)]">Settings</SheetTitle>
+          <SheetTitle className="text-[#D6BCFA] font-[Silkscreen] text-sm uppercase">Settings</SheetTitle>
         </SheetHeader>
-        <div className="py-6 space-y-6">
-          <div className="space-y-2 border-2 border-[#D6BCFA] p-4 rounded-lg bg-[#221F26]/80">
-            <label className="text-sm font-medium text-[#D6BCFA] font-[Silkscreen] block mb-3">Blob Speed ({blobSpeed}%)</label>
-            <Slider
-              value={[blobSpeed]}
-              onValueChange={(value) => setBlobSpeed(value[0])}
-              min={1}
-              max={200}
-              step={1}
-              className="[&_[role=slider]]:bg-[#D6BCFA] [&_[role=slider]]:border-[#D6BCFA] [&_[role=slider]]:shadow-[0_0_10px_rgba(214,188,250,0.3)]"
-            />
-          </div>
-          <div className="space-y-2 border-2 border-[#D6BCFA] p-4 rounded-lg bg-[#221F26]/80">
-            <label className="text-sm font-medium text-[#D6BCFA] font-[Silkscreen] block mb-3">Number of Blobs ({numBlobs})</label>
-            <Slider
-              value={[numBlobs]}
-              onValueChange={(value) => setNumBlobs(Math.round(value[0]))}
-              min={1}
-              max={24}
-              step={1}
-              className="[&_[role=slider]]:bg-[#D6BCFA] [&_[role=slider]]:border-[#D6BCFA] [&_[role=slider]]:shadow-[0_0_10px_rgba(214,188,250,0.3)]"
-            />
-          </div>
-          <div className="space-y-2 border-2 border-[#D6BCFA] p-4 rounded-lg bg-[#221F26]/80">
-            <label className="text-sm font-medium text-[#D6BCFA] font-[Silkscreen] block mb-3">Gradient Start Color</label>
-            <input
-              type="color"
-              value={gradientStart}
-              onChange={(e) => setGradientStart(e.target.value)}
-              className="w-full h-10 rounded cursor-pointer bg-transparent border-2 border-[#D6BCFA] shadow-[0_0_10px_rgba(214,188,250,0.2)]"
-            />
-          </div>
-          <div className="space-y-2 border-2 border-[#D6BCFA] p-4 rounded-lg bg-[#221F26]/80">
-            <label className="text-sm font-medium text-[#D6BCFA] font-[Silkscreen] block mb-3">Gradient End Color</label>
-            <input
-              type="color"
-              value={gradientEnd}
-              onChange={(e) => setGradientEnd(e.target.value)}
-              className="w-full h-10 rounded cursor-pointer bg-transparent border-2 border-[#D6BCFA] shadow-[0_0_10px_rgba(214,188,250,0.2)]"
-            />
-          </div>
+        <div className="py-4 space-y-4">
+          <SettingsSlider
+            label="Blob Speed"
+            value={blobSpeed}
+            onChange={setBlobSpeed}
+            min={1}
+            max={200}
+            step={1}
+          />
+          <SettingsSlider
+            label="Number of Blobs"
+            value={numBlobs}
+            onChange={(value) => setNumBlobs(Math.round(value))}
+            min={1}
+            max={24}
+            step={1}
+          />
+          <SettingsColor
+            label="Gradient Start"
+            value={gradientStart}
+            onChange={setGradientStart}
+          />
+          <SettingsColor
+            label="Gradient End"
+            value={gradientEnd}
+            onChange={setGradientEnd}
+          />
           <Button 
             variant="outline" 
             onClick={handleReset}
-            className="w-full border-2 border-[#D6BCFA] bg-[#221F26]/80 text-[#D6BCFA] hover:bg-[#D6BCFA] hover:text-[#1A1F2C] font-[Silkscreen] uppercase tracking-wider transition-all duration-300 shadow-[0_0_10px_rgba(214,188,250,0.2)]"
+            className="w-full border border-[#D6BCFA] bg-[#221F26]/80 text-[#D6BCFA] hover:bg-[#D6BCFA] hover:text-[#1A1F2C] font-[Silkscreen] text-xs uppercase transition-all duration-300"
           >
-            Reset to Defaults
+            Reset
           </Button>
         </div>
       </SheetContent>
