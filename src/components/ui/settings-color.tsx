@@ -83,7 +83,7 @@ const SettingsColor = ({
         />
         <button
           onClick={onFormatChange}
-          className="w-full text-xs text-white/70 hover:text-white/90 transition-colors text-left font-mono"
+          className="w-full text-[10px] text-white/70 hover:text-white/90 transition-colors text-left font-mono"
         >
           {getDisplayValue()}
         </button>
