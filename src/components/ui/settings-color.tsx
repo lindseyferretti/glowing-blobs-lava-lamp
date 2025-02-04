@@ -14,7 +14,7 @@ const SettingsColor = ({ label, value, onChange }: SettingsColorProps) => {
         type="color"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-8 rounded cursor-pointer bg-transparent"
+        className="w-12 h-8 rounded cursor-pointer bg-transparent"
       />
     </div>
   );

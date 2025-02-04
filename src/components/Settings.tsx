@@ -73,16 +73,18 @@ const Settings = ({
             max={24}
             step={1}
           />
-          <SettingsColor
-            label="Gradient Start"
-            value={gradientStart}
-            onChange={setGradientStart}
-          />
-          <SettingsColor
-            label="Gradient End"
-            value={gradientEnd}
-            onChange={setGradientEnd}
-          />
+          <div className="grid grid-cols-2 gap-2">
+            <SettingsColor
+              label="Gradient Start"
+              value={gradientStart}
+              onChange={setGradientStart}
+            />
+            <SettingsColor
+              label="Gradient End"
+              value={gradientEnd}
+              onChange={setGradientEnd}
+            />
+          </div>
           <Button 
             variant="outline" 
             onClick={handleReset}
