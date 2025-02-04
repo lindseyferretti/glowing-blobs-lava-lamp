@@ -25,20 +25,29 @@ const LavaLamp: React.FC = () => {
     const updateSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      // Reinitialize blobs when screen size changes
+      initBlobs();
     };
     updateSize();
     window.addEventListener('resize', updateSize);
 
-    // Initialize blobs
+    // Initialize blobs with responsive sizes
     const initBlobs = () => {
+      const numBlobs = 8; // Increased number of blobs
       blobs.current = [];
-      for (let i = 0; i < 5; i++) {
+      
+      // Calculate responsive min and max sizes based on screen dimensions
+      const minDimension = Math.min(canvas.width, canvas.height);
+      const minSize = minDimension * 0.02; // 2% of smallest screen dimension
+      const maxSize = minDimension * 0.06; // 6% of smallest screen dimension
+
+      for (let i = 0; i < numBlobs; i++) {
         blobs.current.push({
           x: Math.random() * canvas.width,
           y: canvas.height + Math.random() * 100,
           vx: (Math.random() - 0.5) * 2,
           vy: -Math.random() * 2 - 1,
-          radius: 30 + Math.random() * 20,
+          radius: minSize + Math.random() * (maxSize - minSize),
         });
       }
     };
@@ -59,7 +68,7 @@ const LavaLamp: React.FC = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw blobs
-      blobs.current.forEach((blob, index) => {
+      blobs.current.forEach((blob) => {
         // Update position
         blob.x += blob.vx;
         blob.y += blob.vy;
