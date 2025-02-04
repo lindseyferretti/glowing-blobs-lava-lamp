@@ -26,8 +26,8 @@ const LavaLamp: React.FC = () => {
       const numBlobs = 12;
       blobs.current = [];
       
-      // Calculate max radius as 20% of screen width (40% diameter)
-      const maxRadius = window.innerWidth * 0.2;
+      // Calculate max radius as 10% of screen width (reduced from 20%)
+      const maxRadius = window.innerWidth * 0.1;
       const minRadius = maxRadius * 0.05; // 5% of max radius for smaller blobs
 
       for (let i = 0; i < numBlobs; i++) {
