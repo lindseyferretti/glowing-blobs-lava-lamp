@@ -124,10 +124,10 @@ const LavaLamp: React.FC = () => {
     
     ctx.fill();
 
-    // Create a dynamic glow gradient based on the blob colors
+    // Create a dynamic glow gradient with 75% opacity (25% lighter)
     const glowGradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
-    glowGradient.addColorStop(0, gradientStart + '99'); // Add 60% opacity
-    glowGradient.addColorStop(1, gradientEnd + '99');
+    glowGradient.addColorStop(0, gradientStart + 'BF'); // 75% opacity (BF in hex)
+    glowGradient.addColorStop(1, gradientEnd + 'BF');
     ctx.shadowColor = glowGradient.toString();
     ctx.shadowBlur = 20;
 
