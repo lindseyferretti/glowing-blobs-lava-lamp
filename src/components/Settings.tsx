@@ -12,6 +12,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import SettingsSlider from "@/components/ui/settings-slider";
 import SettingsColor from "@/components/ui/settings-color";
 
+const colorPairs = [
+  { start: '#D946EF', end: '#9b87f5' },  // Default purple-pink
+  { start: '#8B5CF6', end: '#F97316' },  // Vivid purple to orange
+  { start: '#0EA5E9', end: '#F2FCE2' },  // Ocean blue to soft green
+  { start: '#FEC6A1', end: '#E5DEFF' },  // Soft orange to soft purple
+  { start: '#FFDEE2', end: '#D3E4FD' },  // Soft pink to soft blue
+];
+
 interface SettingsProps {
   blobSpeed: number;
   setBlobSpeed: (value: number) => void;
@@ -45,6 +53,15 @@ const Settings = ({
     setGradientStart('#D946EF');
     setGradientEnd('#9b87f5');
     setSmoothness(5);
+  };
+
+  const handleColorClick = () => {
+    const currentPair = colorPairs.findIndex(
+      pair => pair.start === gradientStart && pair.end === gradientEnd
+    );
+    const nextPair = colorPairs[(currentPair + 1) % colorPairs.length];
+    setGradientStart(nextPair.start);
+    setGradientEnd(nextPair.end);
   };
 
   return (
