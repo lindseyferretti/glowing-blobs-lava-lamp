@@ -23,12 +23,12 @@ const LavaLamp: React.FC = () => {
 
     // Initialize blobs with responsive sizes
     const initBlobs = () => {
-      const numBlobs = 12; // Increased number of blobs
+      const numBlobs = 12;
       blobs.current = [];
       
       // Calculate max radius as 20% of screen width (40% diameter)
       const maxRadius = window.innerWidth * 0.2;
-      const minRadius = maxRadius * 0.1; // 10% of max radius for smaller blobs
+      const minRadius = maxRadius * 0.05; // 5% of max radius for smaller blobs
 
       for (let i = 0; i < numBlobs; i++) {
         blobs.current.push({
