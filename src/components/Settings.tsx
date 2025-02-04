@@ -44,8 +44,8 @@ const Settings = ({
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <button className="fixed top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors">
-          <SettingsIcon className="w-6 h-6 text-white/70" />
+        <button className="fixed top-4 right-4">
+          <SettingsIcon className="w-6 h-6 text-white/70 hover:text-white/90 transition-colors" />
         </button>
       </SheetTrigger>
       <SheetContent side={isMobile ? "top" : "right"}>
