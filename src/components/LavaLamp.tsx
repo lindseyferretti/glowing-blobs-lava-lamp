@@ -66,6 +66,7 @@ const LavaLamp: React.FC = () => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Update blob positions
     blobs.current.forEach((blob) => {
       blob.x += blob.vx;
       blob.y += blob.vy;
@@ -124,10 +125,21 @@ const LavaLamp: React.FC = () => {
     
     ctx.fill();
 
-    // Calculate the middle color of the gradient for the glow
-    const middleColor = gradientEnd; // Using the end color for a more vibrant glow
-    ctx.shadowColor = middleColor;
+    // Create a gradient for the glow effect that matches the blob gradient
+    const glowGradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
+    glowGradient.addColorStop(0, gradientStart);
+    glowGradient.addColorStop(1, gradientEnd);
+    ctx.shadowColor = gradientEnd; // Use end color for top glow
     ctx.shadowBlur = 20;
+
+    // Add a second pass with bottom glow
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.shadowColor = gradientStart; // Use start color for bottom glow
+    ctx.shadowBlur = 15;
+    ctx.fill();
+
+    // Reset composite operation
+    ctx.globalCompositeOperation = 'source-over';
 
     animationFrameId.current = requestAnimationFrame(animate);
   }, [gradientStart, gradientEnd, smoothness]);
