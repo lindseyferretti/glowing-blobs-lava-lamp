@@ -123,7 +123,10 @@ const LavaLamp: React.FC = () => {
     }
     
     ctx.fill();
-    ctx.shadowColor = 'rgba(155, 135, 245, 0.6)';
+
+    // Calculate the middle color of the gradient for the glow
+    const middleColor = gradientEnd; // Using the end color for a more vibrant glow
+    ctx.shadowColor = middleColor;
     ctx.shadowBlur = 20;
 
     animationFrameId.current = requestAnimationFrame(animate);
