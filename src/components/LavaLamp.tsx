@@ -23,13 +23,12 @@ const LavaLamp: React.FC = () => {
 
     // Initialize blobs with responsive sizes
     const initBlobs = () => {
-      const numBlobs = 8; // Increased number of blobs
+      const numBlobs = 12; // Increased number of blobs
       blobs.current = [];
       
-      // Calculate responsive min and max sizes based on screen dimensions
-      const minDimension = Math.min(canvas.width, canvas.height);
-      const minSize = minDimension * 0.02; // 2% of smallest screen dimension
-      const maxSize = minDimension * 0.06; // 6% of smallest screen dimension
+      // Calculate max radius as 20% of screen width (40% diameter)
+      const maxRadius = window.innerWidth * 0.2;
+      const minRadius = maxRadius * 0.1; // 10% of max radius for smaller blobs
 
       for (let i = 0; i < numBlobs; i++) {
         blobs.current.push({
@@ -37,7 +36,7 @@ const LavaLamp: React.FC = () => {
           y: canvas.height + Math.random() * 100,
           vx: (Math.random() - 0.5) * 2,
           vy: -Math.random() * 2 - 1,
-          radius: minSize + Math.random() * (maxSize - minSize),
+          radius: minRadius + Math.random() * (maxRadius - minRadius),
         });
       }
     };
