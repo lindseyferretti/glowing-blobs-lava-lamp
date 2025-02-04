@@ -81,7 +81,7 @@ const Settings = ({
             color={gradientStart}
           />
           <SettingsSlider
-            label="Smoothness"
+            label="Edge Smoothness"
             value={smoothness}
             onChange={setSmoothness}
             min={1}
