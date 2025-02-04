@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Settings from './Settings';
-import { hexToHsl } from '../utils/colorUtils';
 
 interface Blob {
   x: number;
@@ -22,18 +21,6 @@ const LavaLamp: React.FC = () => {
   const [gradientStart, setGradientStart] = useState('#D946EF');
   const [gradientEnd, setGradientEnd] = useState('#9b87f5');
   const [smoothness, setSmoothness] = useState(5);
-
-  // Helper function to lighten a hex color
-  const lightenColor = (hex: string): string => {
-    const hsl = hexToHsl(hex);
-    if (!hsl) return hex;
-    
-    // Increase lightness by 25% while ensuring it doesn't exceed 100%
-    const newLightness = Math.min(100, hsl.l + 25);
-    
-    // Convert back to hex
-    return `hsl(${hsl.h}, ${hsl.s}%, ${newLightness}%)`;
-  };
 
   const initBlobs = useCallback((canvas: HTMLCanvasElement) => {
     blobs.current = [];
@@ -136,12 +123,7 @@ const LavaLamp: React.FC = () => {
     }
     
     ctx.fill();
-
-    // Create a dynamic glow gradient with lightened colors
-    const glowGradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
-    glowGradient.addColorStop(0, lightenColor(gradientStart));
-    glowGradient.addColorStop(1, lightenColor(gradientEnd));
-    ctx.shadowColor = glowGradient.toString();
+    ctx.shadowColor = 'rgba(155, 135, 245, 0.6)';
     ctx.shadowBlur = 20;
 
     animationFrameId.current = requestAnimationFrame(animate);
