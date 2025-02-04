@@ -98,7 +98,7 @@ const LavaLamp: React.FC = () => {
         }
       });
 
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      const gradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
       gradient.addColorStop(0, gradientStart);
       gradient.addColorStop(1, gradientEnd);
       
