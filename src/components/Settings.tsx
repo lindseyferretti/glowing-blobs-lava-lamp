@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 interface SettingsProps {
   blobSpeed: number;
   setBlobSpeed: (value: number) => void;
-  blobStickiness: number;
-  setBlobStickiness: (value: number) => void;
   numBlobs: number;
   setNumBlobs: (value: number) => void;
   gradientStart: string;
@@ -26,8 +24,6 @@ interface SettingsProps {
 const Settings = ({
   blobSpeed,
   setBlobSpeed,
-  blobStickiness,
-  setBlobStickiness,
   numBlobs,
   setNumBlobs,
   gradientStart,
@@ -37,7 +33,6 @@ const Settings = ({
 }: SettingsProps) => {
   const handleReset = () => {
     setBlobSpeed(100);
-    setBlobStickiness(100);
     setNumBlobs(12);
     setGradientStart('#9b87f5');
     setGradientEnd('#D946EF');
@@ -60,16 +55,6 @@ const Settings = ({
             <Slider
               value={[blobSpeed]}
               onValueChange={(value) => setBlobSpeed(value[0])}
-              min={1}
-              max={200}
-              step={1}
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Blob Stickiness ({blobStickiness}%)</label>
-            <Slider
-              value={[blobStickiness]}
-              onValueChange={(value) => setBlobStickiness(value[0])}
               min={1}
               max={200}
               step={1}

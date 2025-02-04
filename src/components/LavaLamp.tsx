@@ -16,7 +16,6 @@ const LavaLamp: React.FC = () => {
   const animationFrameId = useRef<number>();
 
   const [blobSpeed, setBlobSpeed] = useState(50);
-  const [blobStickiness, setBlobStickiness] = useState(50);
   const [numBlobs, setNumBlobs] = useState(12);
   const [gradientStart, setGradientStart] = useState('#9b87f5');
   const [gradientEnd, setGradientEnd] = useState('#D946EF');
@@ -88,12 +87,12 @@ const LavaLamp: React.FC = () => {
         const dx = mousePos.current.x - blob.x;
         const dy = mousePos.current.y - blob.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const repulsionRange = 150 * (blobStickiness / 50);
+        const repulsionRange = 150;
         
         if (distance < repulsionRange) {
           const angle = Math.atan2(dy, dx);
           const repulsion = (repulsionRange - distance) / repulsionRange;
-          const repulsionForce = 5 * (blobStickiness / 50);
+          const repulsionForce = 5;
           blob.x -= Math.cos(angle) * repulsion * repulsionForce;
           blob.y -= Math.sin(angle) * repulsion * repulsionForce;
         }
@@ -139,7 +138,7 @@ const LavaLamp: React.FC = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, [numBlobs, blobSpeed, blobStickiness, gradientStart, gradientEnd]);
+  }, [numBlobs, blobSpeed, gradientStart, gradientEnd]);
 
   return (
     <>
@@ -151,8 +150,6 @@ const LavaLamp: React.FC = () => {
       <Settings
         blobSpeed={blobSpeed}
         setBlobSpeed={setBlobSpeed}
-        blobStickiness={blobStickiness}
-        setBlobStickiness={setBlobStickiness}
         numBlobs={numBlobs}
         setNumBlobs={setNumBlobs}
         gradientStart={gradientStart}
