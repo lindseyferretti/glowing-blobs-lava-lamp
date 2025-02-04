@@ -18,6 +18,8 @@ const LavaLamp: React.FC = () => {
   const [blobSpeed, setBlobSpeed] = useState(50);
   const [blobStickiness, setBlobStickiness] = useState(50);
   const [numBlobs, setNumBlobs] = useState(12);
+  const [gradientStart, setGradientStart] = useState('#9b87f5');
+  const [gradientEnd, setGradientEnd] = useState('#D946EF');
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -98,8 +100,8 @@ const LavaLamp: React.FC = () => {
       });
 
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#9b87f5');
-      gradient.addColorStop(1, '#D946EF');
+      gradient.addColorStop(0, gradientStart);
+      gradient.addColorStop(1, gradientEnd);
       
       ctx.fillStyle = gradient;
       ctx.beginPath();
@@ -137,7 +139,7 @@ const LavaLamp: React.FC = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, [numBlobs, blobSpeed, blobStickiness]);
+  }, [numBlobs, blobSpeed, blobStickiness, gradientStart, gradientEnd]);
 
   return (
     <>
@@ -153,6 +155,10 @@ const LavaLamp: React.FC = () => {
         setBlobStickiness={setBlobStickiness}
         numBlobs={numBlobs}
         setNumBlobs={setNumBlobs}
+        gradientStart={gradientStart}
+        setGradientStart={setGradientStart}
+        gradientEnd={gradientEnd}
+        setGradientEnd={setGradientEnd}
       />
     </>
   );

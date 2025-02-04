@@ -16,6 +16,10 @@ interface SettingsProps {
   setBlobStickiness: (value: number) => void;
   numBlobs: number;
   setNumBlobs: (value: number) => void;
+  gradientStart: string;
+  setGradientStart: (value: string) => void;
+  gradientEnd: string;
+  setGradientEnd: (value: string) => void;
 }
 
 const Settings = ({
@@ -25,6 +29,10 @@ const Settings = ({
   setBlobStickiness,
   numBlobs,
   setNumBlobs,
+  gradientStart,
+  setGradientStart,
+  gradientEnd,
+  setGradientEnd,
 }: SettingsProps) => {
   return (
     <Sheet>
@@ -66,6 +74,24 @@ const Settings = ({
               min={1}
               max={24}
               step={1}
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Gradient Start Color</label>
+            <input
+              type="color"
+              value={gradientStart}
+              onChange={(e) => setGradientStart(e.target.value)}
+              className="w-full h-10 rounded cursor-pointer"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Gradient End Color</label>
+            <input
+              type="color"
+              value={gradientEnd}
+              onChange={(e) => setGradientEnd(e.target.value)}
+              className="w-full h-10 rounded cursor-pointer"
             />
           </div>
         </div>
