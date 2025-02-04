@@ -21,7 +21,10 @@ const SettingsSlider = ({ label, value, onChange, min, max, step, color }: Setti
         min={min}
         max={max}
         step={step}
-        className={`[&_[role=slider]]:bg-white [&_.absolute]:bg-[${color}]`}
+        className="[&_[role=slider]]:bg-white"
+        style={{
+          '--slider-color': color
+        } as React.CSSProperties}
       />
     </div>
   );
