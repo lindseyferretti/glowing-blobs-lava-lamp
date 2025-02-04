@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface SettingsColorProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  format: 'hex' | 'rgb' | 'hsl';
+  onFormatChange: () => void;
 }
 
-const SettingsColor = ({ label, value, onChange }: SettingsColorProps) => {
-  const [showFormat, setShowFormat] = useState<'hex' | 'rgb' | 'hsl'>('hex');
-
+const SettingsColor = ({ 
+  label, 
+  value, 
+  onChange, 
+  format, 
+  onFormatChange 
+}: SettingsColorProps) => {
   const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -51,7 +57,7 @@ const SettingsColor = ({ label, value, onChange }: SettingsColorProps) => {
   };
 
   const getDisplayValue = () => {
-    switch (showFormat) {
+    switch (format) {
       case 'hex':
         return value.toUpperCase();
       case 'rgb': {
@@ -65,16 +71,6 @@ const SettingsColor = ({ label, value, onChange }: SettingsColorProps) => {
     }
   };
 
-  const handleClick = () => {
-    setShowFormat(current => {
-      switch (current) {
-        case 'hex': return 'rgb';
-        case 'rgb': return 'hsl';
-        case 'hsl': return 'hex';
-      }
-    });
-  };
-
   return (
     <div className="space-y-2 bg-black/20 p-3 rounded-lg backdrop-blur-sm">
       <label className="text-xs text-white/70 block">{label}</label>
@@ -86,7 +82,7 @@ const SettingsColor = ({ label, value, onChange }: SettingsColorProps) => {
           className="w-full h-8 rounded cursor-pointer bg-transparent"
         />
         <button
-          onClick={handleClick}
+          onClick={onFormatChange}
           className="w-full text-xs text-white/70 hover:text-white/90 transition-colors text-left font-mono"
         >
           {getDisplayValue()}

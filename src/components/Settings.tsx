@@ -46,6 +46,7 @@ const Settings = ({
   setSmoothness,
 }: SettingsProps) => {
   const isMobile = useIsMobile();
+  const [colorFormat, setColorFormat] = React.useState<'hex' | 'rgb' | 'hsl'>('hex');
   
   const handleReset = () => {
     setBlobSpeed(50);
@@ -62,6 +63,16 @@ const Settings = ({
     const nextPair = colorPairs[(currentPair + 1) % colorPairs.length];
     setGradientStart(nextPair.start);
     setGradientEnd(nextPair.end);
+  };
+
+  const handleFormatChange = () => {
+    setColorFormat(current => {
+      switch (current) {
+        case 'hex': return 'rgb';
+        case 'rgb': return 'hsl';
+        case 'hsl': return 'hex';
+      }
+    });
   };
 
   return (
@@ -111,11 +122,15 @@ const Settings = ({
               label="Gradient Start"
               value={gradientStart}
               onChange={setGradientStart}
+              format={colorFormat}
+              onFormatChange={handleFormatChange}
             />
             <SettingsColor
               label="Gradient End"
               value={gradientEnd}
               onChange={setGradientEnd}
+              format={colorFormat}
+              onFormatChange={handleFormatChange}
             />
           </div>
           <Button 
