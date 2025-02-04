@@ -53,11 +53,11 @@ const Settings = ({
         className="bg-[#221F26] border-[#403E43] shadow-[0_0_10px_rgba(214,188,250,0.3)]"
       >
         <SheetHeader>
-          <SheetTitle className="text-[#D6BCFA] font-['Press_Start_2P'] text-xl uppercase tracking-wider">Settings</SheetTitle>
+          <SheetTitle className="text-[#D6BCFA] font-[Silkscreen] text-xl uppercase tracking-wider">Settings</SheetTitle>
         </SheetHeader>
         <div className="py-6 space-y-6">
           <div className="space-y-2 border-2 border-[#403E43] p-4 rounded-lg">
-            <label className="text-sm font-medium text-[#C8C8C9] font-['Press_Start_2P']">Blob Speed ({blobSpeed}%)</label>
+            <label className="text-sm font-medium text-[#C8C8C9] font-[Silkscreen]">Blob Speed ({blobSpeed}%)</label>
             <Slider
               value={[blobSpeed]}
               onValueChange={(value) => setBlobSpeed(value[0])}
@@ -68,7 +68,7 @@ const Settings = ({
             />
           </div>
           <div className="space-y-2 border-2 border-[#403E43] p-4 rounded-lg">
-            <label className="text-sm font-medium text-[#C8C8C9] font-['Press_Start_2P']">Number of Blobs ({numBlobs})</label>
+            <label className="text-sm font-medium text-[#C8C8C9] font-[Silkscreen]">Number of Blobs ({numBlobs})</label>
             <Slider
               value={[numBlobs]}
               onValueChange={(value) => setNumBlobs(Math.round(value[0]))}
@@ -79,7 +79,7 @@ const Settings = ({
             />
           </div>
           <div className="space-y-2 border-2 border-[#403E43] p-4 rounded-lg">
-            <label className="text-sm font-medium text-[#C8C8C9] font-['Press_Start_2P']">Gradient Start Color</label>
+            <label className="text-sm font-medium text-[#C8C8C9] font-[Silkscreen]">Gradient Start Color</label>
             <input
               type="color"
               value={gradientStart}
@@ -88,7 +88,7 @@ const Settings = ({
             />
           </div>
           <div className="space-y-2 border-2 border-[#403E43] p-4 rounded-lg">
-            <label className="text-sm font-medium text-[#C8C8C9] font-['Press_Start_2P']">Gradient End Color</label>
+            <label className="text-sm font-medium text-[#C8C8C9] font-[Silkscreen]">Gradient End Color</label>
             <input
               type="color"
               value={gradientEnd}
@@ -99,7 +99,7 @@ const Settings = ({
           <Button 
             variant="outline" 
             onClick={handleReset}
-            className="w-full border-2 border-[#403E43] bg-[#221F26] text-[#D6BCFA] hover:bg-[#403E43] font-['Press_Start_2P'] uppercase tracking-wider"
+            className="w-full border-2 border-[#403E43] bg-[#221F26] text-[#D6BCFA] hover:bg-[#403E43] font-[Silkscreen] uppercase tracking-wider"
           >
             Reset to Defaults
           </Button>
