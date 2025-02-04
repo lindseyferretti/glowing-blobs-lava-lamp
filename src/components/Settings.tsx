@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SettingsProps {
   blobSpeed: number;
@@ -31,6 +32,8 @@ const Settings = ({
   gradientEnd,
   setGradientEnd,
 }: SettingsProps) => {
+  const isMobile = useIsMobile();
+  
   const handleReset = () => {
     setBlobSpeed(50);
     setNumBlobs(12);
@@ -45,7 +48,7 @@ const Settings = ({
           <SettingsIcon className="w-6 h-6 text-white/70" />
         </button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent side={isMobile ? "top" : "right"}>
         <SheetHeader>
           <SheetTitle>Settings</SheetTitle>
         </SheetHeader>
