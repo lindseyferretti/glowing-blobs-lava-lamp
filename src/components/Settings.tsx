@@ -42,8 +42,8 @@ const Settings = ({
   const handleReset = () => {
     setBlobSpeed(50);
     setNumBlobs(12);
-    setGradientStart('#9b87f5');
-    setGradientEnd('#D946EF');
+    setGradientStart('#D946EF');
+    setGradientEnd('#9b87f5');
     setSmoothness(5);
   };
 

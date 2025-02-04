@@ -17,8 +17,8 @@ const LavaLamp: React.FC = () => {
 
   const [blobSpeed, setBlobSpeed] = useState(50);
   const [numBlobs, setNumBlobs] = useState(12);
-  const [gradientStart, setGradientStart] = useState('#9b87f5');
-  const [gradientEnd, setGradientEnd] = useState('#D946EF');
+  const [gradientStart, setGradientStart] = useState('#D946EF');
+  const [gradientEnd, setGradientEnd] = useState('#9b87f5');
   const [smoothness, setSmoothness] = useState(5);
 
   useEffect(() => {
