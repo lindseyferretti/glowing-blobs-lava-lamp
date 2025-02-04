@@ -19,6 +19,7 @@ const LavaLamp: React.FC = () => {
   const [numBlobs, setNumBlobs] = useState(12);
   const [gradientStart, setGradientStart] = useState('#9b87f5');
   const [gradientEnd, setGradientEnd] = useState('#D946EF');
+  const [smoothness, setSmoothness] = useState(5);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -105,7 +106,7 @@ const LavaLamp: React.FC = () => {
       ctx.fillStyle = gradient;
       ctx.beginPath();
       
-      const stepSize = 5;
+      const stepSize = 11 - smoothness;
       for (let x = 0; x < canvas.width; x += stepSize) {
         for (let y = 0; y < canvas.height; y += stepSize) {
           let sum = 0;
@@ -138,7 +139,7 @@ const LavaLamp: React.FC = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, [numBlobs, blobSpeed, gradientStart, gradientEnd]);
+  }, [numBlobs, blobSpeed, gradientStart, gradientEnd, smoothness]);
 
   return (
     <>
@@ -156,6 +157,8 @@ const LavaLamp: React.FC = () => {
         setGradientStart={setGradientStart}
         gradientEnd={gradientEnd}
         setGradientEnd={setGradientEnd}
+        smoothness={smoothness}
+        setSmoothness={setSmoothness}
       />
     </>
   );

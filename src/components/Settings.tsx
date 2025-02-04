@@ -21,6 +21,8 @@ interface SettingsProps {
   setGradientStart: (value: string) => void;
   gradientEnd: string;
   setGradientEnd: (value: string) => void;
+  smoothness: number;
+  setSmoothness: (value: number) => void;
 }
 
 const Settings = ({
@@ -32,6 +34,8 @@ const Settings = ({
   setGradientStart,
   gradientEnd,
   setGradientEnd,
+  smoothness,
+  setSmoothness,
 }: SettingsProps) => {
   const isMobile = useIsMobile();
   
@@ -40,6 +44,7 @@ const Settings = ({
     setNumBlobs(12);
     setGradientStart('#9b87f5');
     setGradientEnd('#D946EF');
+    setSmoothness(5);
   };
 
   return (
@@ -72,6 +77,15 @@ const Settings = ({
             onChange={(value) => setNumBlobs(Math.round(value))}
             min={1}
             max={24}
+            step={1}
+            color={gradientStart}
+          />
+          <SettingsSlider
+            label="Smoothness"
+            value={smoothness}
+            onChange={setSmoothness}
+            min={1}
+            max={10}
             step={1}
             color={gradientStart}
           />
