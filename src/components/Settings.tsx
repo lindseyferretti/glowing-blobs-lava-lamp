@@ -32,7 +32,7 @@ const Settings = ({
   setGradientEnd,
 }: SettingsProps) => {
   const handleReset = () => {
-    setBlobSpeed(100);
+    setBlobSpeed(50);
     setNumBlobs(12);
     setGradientStart('#9b87f5');
     setGradientEnd('#D946EF');
