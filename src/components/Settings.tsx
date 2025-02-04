@@ -8,6 +8,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 
 interface SettingsProps {
   blobSpeed: number;
@@ -34,6 +35,14 @@ const Settings = ({
   gradientEnd,
   setGradientEnd,
 }: SettingsProps) => {
+  const handleReset = () => {
+    setBlobSpeed(100);
+    setBlobStickiness(100);
+    setNumBlobs(12);
+    setGradientStart('#9b87f5');
+    setGradientEnd('#D946EF');
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -94,6 +103,13 @@ const Settings = ({
               className="w-full h-10 rounded cursor-pointer"
             />
           </div>
+          <Button 
+            variant="outline" 
+            onClick={handleReset}
+            className="w-full"
+          >
+            Reset to Defaults
+          </Button>
         </div>
       </SheetContent>
     </Sheet>
