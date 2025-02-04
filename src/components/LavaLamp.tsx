@@ -21,16 +21,6 @@ const LavaLamp: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Set canvas size
-    const updateSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Reinitialize blobs when screen size changes
-      initBlobs();
-    };
-    updateSize();
-    window.addEventListener('resize', updateSize);
-
     // Initialize blobs with responsive sizes
     const initBlobs = () => {
       const numBlobs = 8; // Increased number of blobs
@@ -51,7 +41,17 @@ const LavaLamp: React.FC = () => {
         });
       }
     };
-    initBlobs();
+
+    // Set canvas size
+    const updateSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // Reinitialize blobs when screen size changes
+      initBlobs();
+    };
+    
+    updateSize();
+    window.addEventListener('resize', updateSize);
 
     // Mouse move handler
     const handleMouseMove = (e: MouseEvent) => {
