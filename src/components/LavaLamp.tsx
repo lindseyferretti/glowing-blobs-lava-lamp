@@ -123,7 +123,12 @@ const LavaLamp: React.FC = () => {
     }
     
     ctx.fill();
-    ctx.shadowColor = 'rgba(155, 135, 245, 0.6)';
+
+    // Create a dynamic glow gradient based on the blob colors
+    const glowGradient = ctx.createLinearGradient(0, canvas.height, 0, 0);
+    glowGradient.addColorStop(0, gradientStart + '99'); // Add 60% opacity
+    glowGradient.addColorStop(1, gradientEnd + '99');
+    ctx.shadowColor = glowGradient.toString();
     ctx.shadowBlur = 20;
 
     animationFrameId.current = requestAnimationFrame(animate);
