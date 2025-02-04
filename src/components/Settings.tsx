@@ -64,6 +64,7 @@ const Settings = ({
             min={1}
             max={200}
             step={1}
+            color={gradientStart}
           />
           <SettingsSlider
             label="Number of Blobs"
@@ -72,6 +73,7 @@ const Settings = ({
             min={1}
             max={24}
             step={1}
+            color={gradientStart}
           />
           <div className="grid grid-cols-2 gap-2">
             <SettingsColor

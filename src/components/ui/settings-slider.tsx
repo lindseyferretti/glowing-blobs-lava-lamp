@@ -8,9 +8,10 @@ interface SettingsSliderProps {
   min: number;
   max: number;
   step: number;
+  color?: string;
 }
 
-const SettingsSlider = ({ label, value, onChange, min, max, step }: SettingsSliderProps) => {
+const SettingsSlider = ({ label, value, onChange, min, max, step, color }: SettingsSliderProps) => {
   return (
     <div className="space-y-2 bg-black/20 p-3 rounded-lg backdrop-blur-sm">
       <label className="text-xs text-white/70 block">{label} ({value})</label>
@@ -20,7 +21,7 @@ const SettingsSlider = ({ label, value, onChange, min, max, step }: SettingsSlid
         min={min}
         max={max}
         step={step}
-        className="[&_[role=slider]]:bg-white"
+        className={`[&_[role=slider]]:bg-white [&_.absolute]:bg-[${color}]`}
       />
     </div>
   );
