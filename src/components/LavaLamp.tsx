@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Settings from './Settings';
 
 interface Blob {
   x: number;
@@ -14,6 +15,10 @@ const LavaLamp: React.FC = () => {
   const mousePos = useRef({ x: 0, y: 0 });
   const animationFrameId = useRef<number>();
 
+  const [blobSpeed, setBlobSpeed] = useState(50);
+  const [blobStickiness, setBlobStickiness] = useState(50);
+  const [numBlobs, setNumBlobs] = useState(12);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -21,38 +26,33 @@ const LavaLamp: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Initialize blobs with responsive sizes
     const initBlobs = () => {
-      const numBlobs = 12;
       blobs.current = [];
       
-      // Calculate max radius as 10% of screen width (reduced from 20%)
       const maxRadius = window.innerWidth * 0.1;
-      const minRadius = maxRadius * 0.05; // 5% of max radius for smaller blobs
+      const minRadius = maxRadius * 0.05;
 
       for (let i = 0; i < numBlobs; i++) {
+        const speedMultiplier = blobSpeed / 50;
         blobs.current.push({
           x: Math.random() * canvas.width,
           y: canvas.height + Math.random() * 100,
-          vx: (Math.random() - 0.5), // Reduced from *2 to *1
-          vy: -Math.random() - 0.5, // Reduced from *2-1 to *1-0.5
+          vx: (Math.random() - 0.5) * speedMultiplier,
+          vy: (-Math.random() - 0.5) * speedMultiplier,
           radius: minRadius + Math.random() * (maxRadius - minRadius),
         });
       }
     };
 
-    // Set canvas size
     const updateSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Reinitialize blobs when screen size changes
       initBlobs();
     };
     
     updateSize();
     window.addEventListener('resize', updateSize);
 
-    // Mouse move handler
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       mousePos.current = {
@@ -62,17 +62,13 @@ const LavaLamp: React.FC = () => {
     };
     canvas.addEventListener('mousemove', handleMouseMove);
 
-    // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update and draw blobs
       blobs.current.forEach((blob) => {
-        // Update position
         blob.x += blob.vx;
         blob.y += blob.vy;
 
-        // Wall collision
         if (blob.x < blob.radius) {
           blob.x = blob.radius;
           blob.vx *= -1;
@@ -82,25 +78,25 @@ const LavaLamp: React.FC = () => {
           blob.vx *= -1;
         }
 
-        // Reset if above screen
         if (blob.y < -blob.radius * 2) {
           blob.y = canvas.height + blob.radius;
           blob.x = Math.random() * canvas.width;
         }
 
-        // Mouse repulsion
         const dx = mousePos.current.x - blob.x;
         const dy = mousePos.current.y - blob.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < 150) {
+        const repulsionRange = 150 * (blobStickiness / 50);
+        
+        if (distance < repulsionRange) {
           const angle = Math.atan2(dy, dx);
-          const repulsion = (150 - distance) / 150;
-          blob.x -= Math.cos(angle) * repulsion * 5;
-          blob.y -= Math.sin(angle) * repulsion * 5;
+          const repulsion = (repulsionRange - distance) / repulsionRange;
+          const repulsionForce = 5 * (blobStickiness / 50);
+          blob.x -= Math.cos(angle) * repulsion * repulsionForce;
+          blob.y -= Math.sin(angle) * repulsion * repulsionForce;
         }
       });
 
-      // Create metaball effect
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
       gradient.addColorStop(0, '#9b87f5');
       gradient.addColorStop(1, '#D946EF');
@@ -108,7 +104,6 @@ const LavaLamp: React.FC = () => {
       ctx.fillStyle = gradient;
       ctx.beginPath();
       
-      // Draw metaballs
       const stepSize = 5;
       for (let x = 0; x < canvas.width; x += stepSize) {
         for (let y = 0; y < canvas.height; y += stepSize) {
@@ -142,14 +137,24 @@ const LavaLamp: React.FC = () => {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
-  }, []);
+  }, [numBlobs, blobSpeed, blobStickiness]);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 bg-darkBg"
-      style={{ touchAction: 'none' }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 bg-darkBg"
+        style={{ touchAction: 'none' }}
+      />
+      <Settings
+        blobSpeed={blobSpeed}
+        setBlobSpeed={setBlobSpeed}
+        blobStickiness={blobStickiness}
+        setBlobStickiness={setBlobStickiness}
+        numBlobs={numBlobs}
+        setNumBlobs={setNumBlobs}
+      />
+    </>
   );
 };
 
