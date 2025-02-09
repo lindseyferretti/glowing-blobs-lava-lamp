@@ -1,12 +1,10 @@
-# DIGITAL LAVA LAMP
+# Digital Lava Lamp
 
 Inspired by: https://codepen.io/TC5550/pen/WNNWoaO
 
 ## Project info
 
 **Lovable URL**: https://lovable.dev/projects/099823f7-ea47-43f4-abfe-c22597bd63e0
-
-**Use your preferred IDE**
 
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
@@ -27,16 +25,6 @@ npm i
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
 
 This project is built with .
 
